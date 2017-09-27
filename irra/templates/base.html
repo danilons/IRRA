@@ -1,0 +1,105 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <link href="{% static 'bootstrap/dist/css/bootstrap.css' %}" rel="stylesheet">
+    {% block css %}
+      <style>
+        html, body, #main-container { height:100%; }
+        body {
+          padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+        div.jsoneditor {
+          border-color: #337ab7 !important;
+        }
+        div.jsoneditor-menu {
+          background: #337ab7 !important;
+          border: none !important;
+        }
+        div.jsoneditor-contextmenu ul li button.jsoneditor-selected,
+        div.jsoneditor-contextmenu ul li button.jsoneditor-selected:hover,
+        div.jsoneditor-contextmenu ul li button.jsoneditor-selected:focus {
+          background-color: #337ab7 !important;
+        }
+        a.jsoneditor-poweredBy {
+          display: none !important;
+        }
+
+      </style>
+
+      <style>
+      {% block css.custom %}
+      .image-list{
+        display: block;
+        max-width: 100%;
+        overflow: auto;
+      }
+      img {
+        width: 256px;
+        height: 256px;
+      }
+      {% endblock css.custom %}
+      </style>
+    {% endblock %}
+
+    {% block js.head %}
+      <script type="text/javascript" src='{% static 'jquery/dist/jquery.js' %}'></script>
+    {% endblock js.head %}
+  </head>
+
+  <body>
+    {% block navigation %}
+      {% include '_navigation.html' %}
+    {% endblock %}
+
+    <div class="container" id="main-container">
+      {% if messages %}
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+      {% endif %}
+
+      {% block content %}{% endblock %}
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="error-modal">
+      <div class="modal-dialog">
+        <div class="modal-content panel-danger">
+          <div class="modal-header panel-heading">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Error</h4>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Le javascript
+	 ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block javascript %}
+      <script type="text/javascript" src='{% static 'bootstrap/dist/js/bootstrap.js' %}'></script>
+
+      <!-- Form media -->
+      {{ form.media }}
+      <!-- Form media -->
+
+      <script>
+      {% block js.custom %}
+      {% endblock js.custom %}
+      </script>
+
+    {% endblock %}
+  </body>
+</html>
