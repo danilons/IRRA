@@ -4,19 +4,23 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-12">
-            <div class="col-sm-4">
-                {% if request.GET.trainset == '1' %}
-                <h2>Images :: Train</h2>
-                {% elif request.GET.trainset == '2' %}
-                <h2>Images :: Test</h2>
-                {% else %}
-                <h2>Images</h2>
-                {% endif %}
-            </div>
-            <div class="col-sm-8">
-                {% include "_pagination.html" %}
-            </div>
+        <h3>Images {% if request.GET.q %}<small class="small">(Search results for <em>{{ request.GET.q }}</em>)</small>{% endif %}</h3>
+          <ol class="breadcrumb">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'dataset:image_list' %}">Dataset</a></li>
+             {% if request.GET.trainset == '1' %}
+                <li>Train</li>
+            {% elif request.GET.trainset == '2' %}
+               <li>Test</li>
+            {% else %}
+              <li>Images</li>
+            {% endif %}
+          </ol>
+          <div class="col-lg-4">
+            {% include "_search.html" %}
+          </div>
+        <div class="col-sm-8">
+            {% include "_pagination.html" %}
         </div>
         <div class="col-lg-12 text-right small">
             <b>Displaying
@@ -31,7 +35,9 @@
            {% for image in images %}
                 <div class="col-sm-3">
                     <div class="row text-center">
-                        <img class="image-list" src="{% static 'dataset/'|add:image.filename %}">
+                        <a href="{% url 'dataset:image_detail' pk=image.id %}{% if experiment %}?experiment={{experiment}}{% elif request.GET.experiment %}?experiment={{request.GET.experiment}}{% endif %}">
+                           <img class="image-list" src="{% static 'dataset/'|add:image.filename %}">
+                        </a>
                     </div>
                 </div>
            {% endfor %}

@@ -1,5 +1,6 @@
 <form method="GET" style="margin: 20px 0;">
   <div class="input-group">
+    <input type="hidden" name="trainset" {% if request.GET.trainset %}value="{{ request.GET.trainset }}"{% endif %}/>
     <input type="text" placeholder="Search" name="q" value="{{ request.GET.q }}" class="form-control" />
     <span class="input-group-btn">
       <button class="btn btn-default" type="submit">

@@ -4,6 +4,6 @@ from . import views
 
 app_name = 'dataset'
 urlpatterns = [
-    url(r'^$', views.ImagesView.as_view(), name='image_list'),
-    # url(r'^(?P<trainset>[1-2]+)$', views.ImagesView.as_view(), name='trainset'),
+    url(r'^$', views.ImageListView.as_view(), name='image_list'),
+    url(r'^(?P<pk>[-\w]+)/$', views.ImageDetailView.as_view(), name='image_detail'),
 ]

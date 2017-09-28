@@ -7,19 +7,26 @@
     </div>
       <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dataset<span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="{% url 'dataset:image_list' %}?trainset=1">Train</a></li>
-                    <li><a href="{% url 'dataset:image_list' %}?trainset=2">Test</a></li>
-                    <li><a href="{% url 'dataset:image_list' %}">All</a></li>
-                  </ul>
-                </li>
+              <li class="drowdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Lan(2012)
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li class="dropdown-submenu">
+                    <a tabindex="-1" href="#" class="test">Dataset<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a tabindex="-1" href="{% url 'dataset:image_list' %}?trainset=1&experiment=1">Train</a></li>
+                      <li><a tabindex="-1" href="{% url 'dataset:image_list' %}?trainset=2&experiment=1">Test</a></li>
+                      <li><a tabindex="-1" href="{% url 'dataset:image_list' %}?experiment=1">All</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin
+                <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li class="divider"></li>
                 <li><a href="#">TODO</a></li>

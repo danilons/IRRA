@@ -1,0 +1,67 @@
+{% extends 'page.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <h3>Images</h3>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'dataset:image_list' %}">Dataset</a></li>
+         {% if image.trainset == '1' %}
+        <li><a href="{% url 'dataset:image_list' %}?trainset=1">Train</a></li>
+         {% else %}
+            <li><a href="{% url 'dataset:image_list' %}?trainset=2">Test</a></li>
+         {% endif %}
+        <li>{{ image.filename }}</li>
+    </ol>
+    <div class="col-sm-12">
+        <div class="col-sm-1">
+            <b>Original:</b>
+        </div>
+        <div class="col-sm-3">
+            <img class="image-list" src="{% static 'dataset/'|add:image.filename %}">
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="col-sm-1">
+            <b>Label:</b>
+        </div>
+        <div class="col-sm-3">
+            <img class="image-list" src="data:image/png;base64,{{ground_truth}}">
+        </div>
+        <div class="col-sm-1">
+            <b>Overlay:</b>
+        </div>
+        <div class="col-sm-3">
+            <img class="image-list" src="data:image/png;base64,{{overlay}}">
+        </div>
+        <div class="col-sm-4">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Color</th>
+                        <th>Object</th>
+                    </tr>
+                    {% for name, color in colors %}
+                    <tr>
+                        <td style="background-color:{{color}}"></td>
+                        <td>{{name}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="col-sm-1">
+            <b>Segmented:</b>
+        </div>
+        <div class="col-sm-3">
+            <img class="image-list" src="data:image/png;base64,{{segmented}}">
+        </div>
+    </div>
+
+</div>
+{% endblock %}
