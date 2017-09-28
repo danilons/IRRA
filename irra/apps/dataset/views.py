@@ -26,6 +26,7 @@ class ImageDetailView(DetailView):
         alpha = 0.7
         image = cv2.imread(os.path.join(settings.STATIC_ROOT, 'dataset', context['image'].filename))
         ground_truth_image = np.zeros(image.shape, dtype=image.dtype)
+        contour_image = np.zeros(image.shape, dtype=image.dtype)
         colors = [('background', "rgb(0, 0, 0)")]
 
         for obj in ImageObject.objects.filter(image=context['image'], experiment=self.request.GET.get('experiment', 1)):
@@ -35,12 +36,14 @@ class ImageDetailView(DetailView):
             coords = np.vstack((np.fromiter(obj.x.replace('[', '').replace(']', '').split(), dtype=np.float32),
                                 np.fromiter(obj.y.replace('[', '').replace(']', '').split(), dtype=np.float32)))
             cv2.drawContours(ground_truth_image, [coords.T.astype(np.int32)], -1, color, -1)
+            cv2.drawContours(contour_image, [coords.T.astype(np.int32)], -1, color, 3)
 
         cv2.addWeighted(ground_truth_image, alpha, image, 1 - alpha, 0, image)
 
         segmented = cv2.imread(os.path.join(settings.STATIC_ROOT, 'segmented', context['image'].filename.replace('.jpg', '.png')))
         context['segmented'] = image2base64(segmented)
         context['ground_truth'] = image2base64(ground_truth_image)
+        context['contour'] = image2base64(contour_image)
         context['overlay'] = image2base64(image)
         context['colors'] = sorted(list(set(colors)))
         return context
