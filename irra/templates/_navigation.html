@@ -19,6 +19,17 @@
                       <li><a tabindex="-1" href="{% url 'dataset:image_list' %}?experiment=1">All</a></li>
                     </ul>
                   </li>
+
+                  <li class="dropdown-submenu">
+                    <a tabindex="-1" href="#" class="test">Queries<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a tabindex="-1" href="{% url 'dataset:query_list' %}?query_type=a">Query A</a></li>
+                      <li><a tabindex="-1" href="{% url 'dataset:query_list' %}?query_type=b">Query B</a></li>
+                      <li><a tabindex="-1" href="{% url 'dataset:query_list' %}?query_type=c">Query C</a></li>
+                      <li><a tabindex="-1" href="{% url 'dataset:query_list' %}?query_type=d">Query D</a></li>
+                      <li><a tabindex="-1" href="{% url 'dataset:query_list' %}?query_type=e">Query E</a></li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
           </ul>

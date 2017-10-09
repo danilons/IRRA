@@ -1,0 +1,49 @@
+{% extends 'page.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <h3>Query {% if request.GET.q %}<small class="small">(Search results for <em>{{ request.GET.q }}</em>)</small>{% endif %}</h3>
+          <ol class="breadcrumb">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li>Query</li>
+            <li>{{ request.GET.query_type.title }}</li>
+          </ol>
+          <div class="col-lg-4">
+            {% include "_search.html" %}
+          </div>
+        <div class="col-sm-8">
+            {% include "_pagination.html" %}
+        </div>
+        <div class="col-lg-12 text-right small">
+            <b>Displaying
+                {% if page_obj.paginator.count < page_obj.paginator.per_page %}
+                    {{ page_obj.paginator.count }}
+                {% else %}
+                    {{ page_obj.paginator.per_page }}
+                {% endif %} items of {{ page_obj.paginator.count }} (Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }})</b>
+        </div>
+
+        <div class="col-sm-12">
+           <table class="table">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Query</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for query_id, name in query_names %}
+                    <tr>
+                        <td><a href="{% url 'dataset:query_detail' pk=query_id %}">{{ query_id }}</a></td>
+                        <td><a href="{% url 'dataset:query_detail' pk=query_id %}">{{ name }}</a></td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,3 +1,6 @@
+notebooks/
+models/
+segmentation/
 data/
 *.sqlite3
 *.pyc

@@ -137,6 +137,9 @@ STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
 SUN09 = 'data/sun09_groundTruth.mat'
 QUERY_TRAIN = 'data/Struct-Query-Train.mat'
 QUERY_TEST = 'data/Struct-Query-Test.mat'
+SEGMENTATION = 'data/segmented'
+
+IMAGE_SHAPE = (384, 384)
 
 STATICFILES_DIRS = [
     'data/images/',
